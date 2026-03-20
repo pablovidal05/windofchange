@@ -16,3 +16,5 @@ Aplicación de clima desarrollada como proyecto del Módulo 2. Muestra el clima 
 ## Repositorio
 https://github.com/pablovidal05/windofchange
 
+
+Está muy bueno el ejercicio, gracias 
