@@ -14,5 +14,5 @@ Aplicación de clima desarrollada como proyecto del Módulo 2. Muestra el clima 
 2. Abre `index.html` directamente en el navegador
 
 ## Repositorio
-
+https://github.com/pablovidal05/windofchange
 
