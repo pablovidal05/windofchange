@@ -1,0 +1,97 @@
+@use '../base/variables' as *;
+
+.weather-detail {
+  padding: 1rem;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__main-icon {
+    font-size: 5rem;
+    line-height: 1;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  &__name {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+    color: $black;
+  }
+
+  &__status {
+    color: $gray-600;
+    font-size: 1.1rem;
+    text-transform: capitalize;
+  }
+
+
+  &__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1dfr);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  &__stat-card {
+    background-color: $gray-100;
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+
+    .label {
+      display: block;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: $gray-600;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    .value {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: $black;
+    }
+  }
+
+  &__forecast-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid $gray-200;
+    padding-bottom: 0.5rem;
+  }
+}
+
+
+.forecast-card {
+  flex: 1;
+  min-width: 80px;
+  background: $white;
+  border: 1px solid $gray-200;
+  border-radius: 10px;
+  padding: 0.75rem;
+  text-align: center;
+
+  &__day {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: $gray-400;
+    text-transform: uppercase;
+  }
+
+  &__icon {
+    font-size: 1.5rem;
+    margin: 0.25rem 0;
+  }
+
+  &__temp {
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+}

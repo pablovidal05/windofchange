@@ -1,1 +1,40 @@
 @use '../base/variables' as *;
+
+.place-card {
+  background-color: $white;
+  border: 1px solid $gray-200;
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  
+  @include card-shadow-hover; 
+
+  &__icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  &__name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: $black;
+    margin-bottom: 0.25rem;
+  }
+
+  &__temp {
+    font-family: $font-display;
+    font-size: 2.2rem;
+    color: $black;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  &__status {
+    font-size: 0.85rem;
+    color: $gray-600;
+    margin-top: 0.5rem;
+    display: block;
+  }
+}

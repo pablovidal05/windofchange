@@ -30,13 +30,16 @@ function renderHome() {
 
   ciudades.forEach((ciudad) => {
     const col = document.createElement("div");
-    col.className = "col-6 col-md-4 col-lg-3";
+col.className = "col-12 col-md-6 col-lg-4 col-xl-3"; 
+    
     col.innerHTML = `
-      <div class="ciudad-card" onclick="irADetalle(${ciudad.id})">
-        <div class="icono">${ciudad.icono}</div>
-        <div class="nombre">${ciudad.nombre}</div>
-        <div class="temperatura">${ciudad.temperatura}°</div>
-        <div class="estado">${ciudad.estado}</div>
+      <div class="place-card" onclick="irADetalle(${ciudad.id})">
+        <span class="place-card__icon">${ciudad.icono}</span>
+        <div class="place-card__info">
+            <h3 class="place-card__name">${ciudad.nombre}</h3>
+            <div class="place-card__temp">${ciudad.temperatura}°</div>
+            <span class="place-card__status">${ciudad.estado}</span>
+        </div>
       </div>
     `;
     contenedor.appendChild(col);
@@ -54,25 +57,45 @@ function irADetalle(id) {
   const pronostico = generarPronostico(ciudad.temperatura);
 
   const pronosticoHTML = pronostico.map((dia) => `
-    <div class="card-dia text-center p-2">
-      <div class="dia">${dia.dia}</div>
-      <div>${dia.icono}</div>
-      <div class="temp-dia">${dia.temp}°C</div>
+    <div class="forecast-card">
+      <div class="forecast-card__day">${dia.dia}</div>
+      <div class="forecast-card__icon">${dia.icono}</div>
+      <div class="forecast-card__temp">${dia.temp}°</div>
     </div>
   `).join("");
 
   abrirOffcanvas(`
-    <div style="font-size:3rem">${ciudad.icono}</div>
-    <h2>${ciudad.nombre}</h2>
-    <p>${ciudad.estado}</p>
-    <hr>
-    <p><strong>Temperatura:</strong> ${ciudad.temperatura}°C</p>
-    <p><strong>Humedad:</strong> ${ciudad.humedad}%</p>
-    <p><strong>Viento:</strong> ${ciudad.viento} km/h</p>
-    <p><strong>Sensación:</strong> ${ciudad.temperatura - 2}°C</p>
-    <hr>
-    <h6>Pronóstico semanal</h6>
-    <div class="d-flex flex-wrap gap-2">${pronosticoHTML}</div>
+    <div class="weather-detail">
+      <div class="weather-detail__header">
+        <span class="weather-detail__main-icon">${ciudad.icono}</span>
+        <h2 class="weather-detail__name">${ciudad.nombre}</h2>
+        <p class="weather-detail__status">${ciudad.estado}</p>
+      </div>
+
+      <div class="weather-detail__stats">
+        <div class="weather-detail__stat-card">
+          <span class="label">Humedad</span>
+          <span class="value">${ciudad.humedad}%</span>
+        </div>
+        <div class="weather-detail__stat-card">
+          <span class="label">Viento</span>
+          <span class="value">${ciudad.viento} km/h</span>
+        </div>
+        <div class="weather-detail__stat-card">
+          <span class="label">Sensación</span>
+          <span class="value">${ciudad.temperatura - 2}°</span>
+        </div>
+        <div class="weather-detail__stat-card">
+          <span class="label">Presión</span>
+          <span class="value">1013 hPa</span>
+        </div>
+      </div>
+
+      <h6 class="weather-detail__forecast-title">Pronóstico 5 días</h6>
+      <div class="d-flex justify-content-between gap-2">
+        ${pronosticoHTML}
+      </div>
+    </div>
   `);
 }
 
