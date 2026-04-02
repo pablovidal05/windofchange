@@ -1,0 +1,55 @@
+@use '../base/variables' as *;
+
+
+body {
+  font-family: $font-body;
+  background-color: $gray-100;
+  color: $gray-800;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1; 
+}
+
+.navbar {
+  background-color: $white;
+  border-bottom: 1px solid $gray-200;
+  padding: 1rem 0;
+
+  &__brand {
+    font-family: $font-display;
+    font-weight: 700;
+    color: $black !important;
+  }
+}
+
+.header-hero {
+  background-color: $white;
+  padding: 4rem 0;
+  text-align: center;
+  border-bottom: 1px solid $gray-200;
+
+  &__title {
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 0.5rem;
+  }
+
+  &__subtitle {
+    color: $gray-600;
+    font-size: 1.1rem;
+  }
+}
+
+.footer {
+  background-color: $white;
+  padding: 2rem 0;
+  border-top: 1px solid $gray-200;
+  margin-top: 4rem;
+  text-align: center;
+  color: $gray-600;
+  font-size: 0.9rem;
+}
