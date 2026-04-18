@@ -13,6 +13,10 @@ Al hacer clic en cualquier ciudad, la aplicación recorre el pronóstico semanal
 ### 🛡️ Seguridad en el DOM
 La interfaz de detalle se construye de manera segura utilizando `document.createElement()` y `textContent`, evitando la inyección directa de strings con `innerHTML` para prevenir vulnerabilidades.
 
+refactorización segura del DOM.
+
 Link repositorio: https://github.com/pablovidal05/windofchange
+
+
 
 ---
