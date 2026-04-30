@@ -25,3 +25,8 @@ A partir del pronóstico de 7 días obtenido de la API se calcula:
 ## Cómo ejecutar
 
 Abrir index.html en el navegador. Requiere conexión a internet para consumir la API.
+
+
+## Repositorio
+
+https://github.com/pablovidal05/windofchange
