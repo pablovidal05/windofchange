@@ -1,22 +1,24 @@
-¡Hola! Esta es la evolución de mi aplicación de clima. En esta etapa, el foco principal fue darle "vida" a la interfaz utilizando JavaScript Vanilla, separando los datos del HTML y manipulando el DOM de forma segura.
+# WeatherApp – Módulo 5
 
-### 🗂️ Modelado de Datos
-Toda la información meteorológica dejó de estar "quemada" en el HTML. Ahora está modelada en JavaScript mediante un **arreglo de objetos** llamado `ciudades`. Cada objeto de ciudad contiene sus datos actuales (temperatura, humedad, viento) y un sub-arreglo llamado `pronosticoSemanal`, que almacena el detalle del clima para los próximos 7 días.
+App de clima que muestra el estado actual y pronóstico semanal de 6 ciudades chilenas, consumiendo datos reales desde Open-Meteo API.
 
-### 📊 Estadísticas Semanales
-Al hacer clic en cualquier ciudad, la aplicación recorre el pronóstico semanal utilizando ciclos y condicionales para calcular y renderizar en tiempo real:
-* **Temperaturas extremas:** La mínima y máxima de la semana.
-* **Promedio:** El promedio de temperatura semanal.
-* **Frecuencia del clima:** Un conteo exacto de cuántos días estarán soleados, nublados o lluviosos.
-* **Resumen inteligente:** Un mensaje de texto dinámico que cambia dependiendo de cuál fue la condición climática más repetida durante esa semana.
+## Estructura de clases
 
-### 🛡️ Seguridad en el DOM
-La interfaz de detalle se construye de manera segura utilizando `document.createElement()` y `textContent`, evitando la inyección directa de strings con `innerHTML` para prevenir vulnerabilidades.
+- **ApiClient** — responsable de hacer fetch a Open-Meteo y devolver el JSON crudo.
+- **WeatherApp** — gestiona las ciudades, procesa la respuesta de la API, interpreta los weather codes y coordina la interfaz.
 
-refactorización segura del DOM.
+## API utilizada
 
-Link repositorio: https://github.com/pablovidal05/windofchange
+- **Nombre:** Open-Meteo  
+- **URL base:** https://api.open-meteo.com/v1/forecast  
+- **Documentación:** https://open-meteo.com/en/docs  
+- Sin API key requerida. Gratuita y de código abierto.
 
+## Cómo se calculan las estadísticas
 
+A partir del pronóstico de 7 días obtenido de la API se calcula:
+- Temperatura mínima y máxima de la semana
+- Temperatura promedio (media de min+max por día)
+- Conteo de días por tipo de clima
+- Alertas automáticas: calor si promedio > 28°C, lluvia si hay 3+ días lluviosos
 
----
