@@ -1,80 +1,93 @@
-const ciudades = [
-  {
-    id: 1, nombre: "Santiago", pais: "Chile", icono: "⛅", temperatura: 22, estado: "Parcialmente nublado", humedad: 55, viento: 18,
-    pronosticoSemanal: [
-      { dia: "Lun", min: 10, max: 22, estado: "Soleado" },
-      { dia: "Mar", min: 12, max: 24, estado: "Soleado" },
-      { dia: "Mié", min: 11, max: 20, estado: "Nublado" },
-      { dia: "Jue", min: 9, max: 18, estado: "Lluvioso" },
-      { dia: "Vie", min: 10, max: 21, estado: "Parcialmente nublado" },
-      { dia: "Sáb", min: 11, max: 23, estado: "Soleado" },
-      { dia: "Dom", min: 13, max: 25, estado: "Soleado" }
-    ]
-  },
-  {
-    id: 2, nombre: "Valparaíso", pais: "Chile", icono: "🌬️", temperatura: 17, estado: "Viento costero", humedad: 72, viento: 32,
-    pronosticoSemanal: [
-      { dia: "Lun", min: 12, max: 18, estado: "Nublado" },
-      { dia: "Mar", min: 11, max: 17, estado: "Viento costero" },
-      { dia: "Mié", min: 10, max: 16, estado: "Nublado" },
-      { dia: "Jue", min: 9, max: 15, estado: "Lluvioso" },
-      { dia: "Vie", min: 11, max: 17, estado: "Parcialmente nublado" },
-      { dia: "Sáb", min: 12, max: 19, estado: "Soleado" },
-      { dia: "Dom", min: 12, max: 20, estado: "Soleado" }
-    ]
-  },
-  {
-    id: 3, nombre: "La Serena", pais: "Chile", icono: "☀️", temperatura: 25, estado: "Soleado", humedad: 48, viento: 12,
-    pronosticoSemanal: [
-      { dia: "Lun", min: 14, max: 25, estado: "Soleado" },
-      { dia: "Mar", min: 15, max: 26, estado: "Soleado" },
-      { dia: "Mié", min: 13, max: 24, estado: "Parcialmente nublado" },
-      { dia: "Jue", min: 14, max: 23, estado: "Nublado" },
-      { dia: "Vie", min: 15, max: 25, estado: "Soleado" },
-      { dia: "Sáb", min: 16, max: 27, estado: "Soleado" },
-      { dia: "Dom", min: 15, max: 26, estado: "Soleado" }
-    ]
-  },
-  {
-    id: 4, nombre: "Antofagasta", pais: "Chile", icono: "🌤️", temperatura: 28, estado: "Despejado", humedad: 35, viento: 20,
-    pronosticoSemanal: [
-      { dia: "Lun", min: 16, max: 28, estado: "Despejado" },
-      { dia: "Mar", min: 17, max: 29, estado: "Despejado" },
-      { dia: "Mié", min: 16, max: 27, estado: "Despejado" },
-      { dia: "Jue", min: 15, max: 26, estado: "Soleado" },
-      { dia: "Vie", min: 16, max: 28, estado: "Despejado" },
-      { dia: "Sáb", min: 17, max: 29, estado: "Despejado" },
-      { dia: "Dom", min: 17, max: 30, estado: "Soleado" }
-    ]
-  },
-  {
-    id: 5, nombre: "Concepción", pais: "Chile", icono: "🌧️", temperatura: 13, estado: "Lluvia leve", humedad: 85, viento: 22,
-    pronosticoSemanal: [
-      { dia: "Lun", min: 8, max: 14, estado: "Lluvioso" },
-      { dia: "Mar", min: 7, max: 13, estado: "Lluvioso" },
-      { dia: "Mié", min: 9, max: 15, estado: "Nublado" },
-      { dia: "Jue", min: 8, max: 14, estado: "Lluvioso" },
-      { dia: "Vie", min: 10, max: 16, estado: "Parcialmente nublado" },
-      { dia: "Sáb", min: 11, max: 17, estado: "Soleado" },
-      { dia: "Dom", min: 9, max: 15, estado: "Nublado" }
-    ]
-  },
-  {
-    id: 6, nombre: "Puerto Montt", pais: "Chile", icono: "🌨️", temperatura: 9, estado: "Lluvia intensa", humedad: 90, viento: 28,
-    pronosticoSemanal: [
-      { dia: "Lun", min: 4, max: 10, estado: "Lluvia intensa" },
-      { dia: "Mar", min: 3, max: 9, estado: "Lluvia intensa" },
-      { dia: "Mié", min: 5, max: 11, estado: "Nublado" },
-      { dia: "Jue", min: 4, max: 9, estado: "Lluvioso" },
-      { dia: "Vie", min: 6, max: 12, estado: "Parcialmente nublado" },
-      { dia: "Sáb", min: 5, max: 11, estado: "Nublado" },
-      { dia: "Dom", min: 4, max: 10, estado: "Lluvia intensa" }
-    ]
-  }
+// ── DATOS BASE ────────────────────────────────────────────────────
+const CIUDADES_BASE = [
+  { id: 1, nombre: "Santiago",     pais: "Chile", lat: -33.45, lon: -70.67 },
+  { id: 2, nombre: "Valparaíso",   pais: "Chile", lat: -33.04, lon: -71.62 },
+  { id: 3, nombre: "La Serena",    pais: "Chile", lat: -29.90, lon: -71.25 },
+  { id: 4, nombre: "Antofagasta",  pais: "Chile", lat: -23.65, lon: -70.40 },
+  { id: 5, nombre: "Concepción",   pais: "Chile", lat: -36.82, lon: -73.05 },
+  { id: 6, nombre: "Puerto Montt", pais: "Chile", lat: -41.47, lon: -72.94 }
 ];
 
-const buscarCiudadPorId = (id) => ciudades.find(ciudad => ciudad.id === id);
 
+// ── CLASE: ApiClient ──────────────────────────────────────────────
+class ApiClient {
+  constructor() {
+    this.baseUrl = "https://api.open-meteo.com/v1/forecast";
+  }
+
+  async obtenerClima(lat, lon) {
+    const url = `${this.baseUrl}?latitude=${lat}&longitude=${lon}&current=temperature_2m,weathercode,windspeed_10m,relativehumidity_2m&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=America/Santiago&forecast_days=7`;
+    const response = await fetch(url);
+    if (!response.ok) throw new Error("Error al conectar con la API");
+    return response.json();
+  }
+}
+
+
+// ── CLASE: WeatherApp ─────────────────────────────────────────────
+class WeatherApp {
+  constructor(apiClient) {
+    this.apiClient = apiClient;
+    this.ciudades = [];
+  }
+
+  interpretarCodigo(code) {
+    if (code === 0)  return { estado: "Despejado",            icono: "☀️" };
+    if (code <= 2)   return { estado: "Parcialmente nublado", icono: "⛅" };
+    if (code <= 3)   return { estado: "Nublado",              icono: "☁️" };
+    if (code <= 48)  return { estado: "Niebla",               icono: "🌫️" };
+    if (code <= 55)  return { estado: "Llovizna",             icono: "🌦️" };
+    if (code <= 65)  return { estado: "Lluvioso",             icono: "🌧️" };
+    if (code <= 77)  return { estado: "Nieve",                icono: "❄️" };
+    if (code <= 82)  return { estado: "Lluvia intensa",       icono: "⛈️" };
+    return                   { estado: "Tormenta",            icono: "🌩️" };
+  }
+
+  procesarRespuesta(ciudadBase, datos) {
+    const current = datos.current;
+    const daily = datos.daily;
+    const { estado, icono } = this.interpretarCodigo(current.weathercode);
+    const diasSemana = ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"];
+
+    const pronosticoSemanal = daily.time.map((fecha, i) => {
+      const diaSemana = diasSemana[new Date(fecha).getDay()];
+      const { estado: estadoDia } = this.interpretarCodigo(daily.weathercode[i]);
+      return {
+        dia:    diaSemana,
+        min:    Math.round(daily.temperature_2m_min[i]),
+        max:    Math.round(daily.temperature_2m_max[i]),
+        estado: estadoDia
+      };
+    });
+
+    return {
+      id:                ciudadBase.id,
+      nombre:            ciudadBase.nombre,
+      pais:              ciudadBase.pais,
+      icono,
+      temperatura:       Math.round(current.temperature_2m),
+      estado,
+      humedad:           current.relativehumidity_2m,
+      viento:            Math.round(current.windspeed_10m),
+      pronosticoSemanal
+    };
+  }
+
+  async cargarCiudades() {
+    const promesas = CIUDADES_BASE.map(async (ciudadBase) => {
+      const datos = await this.apiClient.obtenerClima(ciudadBase.lat, ciudadBase.lon);
+      return this.procesarRespuesta(ciudadBase, datos);
+    });
+    this.ciudades = await Promise.all(promesas);
+  }
+
+  buscarCiudadPorId(id) {
+    return this.ciudades.find(c => c.id === id);
+  }
+}
+
+
+// ── ESTADÍSTICAS ──────────────────────────────────────────────────
 const calcularEstadisticas = (pronostico) => {
   let minSemanal = pronostico[0].min;
   let maxSemanal = pronostico[0].max;
@@ -82,25 +95,17 @@ const calcularEstadisticas = (pronostico) => {
   let conteoClima = {};
 
   for (let i = 0; i < pronostico.length; i++) {
-    let dia = pronostico[i];
-
+    const dia = pronostico[i];
     if (dia.min < minSemanal) minSemanal = dia.min;
     if (dia.max > maxSemanal) maxSemanal = dia.max;
-
     sumaTemperaturas += (dia.min + dia.max) / 2;
-
-    if (conteoClima[dia.estado]) {
-      conteoClima[dia.estado]++;
-    } else {
-      conteoClima[dia.estado] = 1;
-    }
+    conteoClima[dia.estado] = (conteoClima[dia.estado] || 0) + 1;
   }
 
-  let promedioSemanal = (sumaTemperaturas / pronostico.length).toFixed(1);
+  const promedioSemanal = (sumaTemperaturas / pronostico.length).toFixed(1);
 
   let estadoMasFrecuente = "";
   let diasMaximos = 0;
-
   for (const estado in conteoClima) {
     if (conteoClima[estado] > diasMaximos) {
       diasMaximos = conteoClima[estado];
@@ -117,25 +122,40 @@ const calcularEstadisticas = (pronostico) => {
     resumenTexto = "Semana gris y con mucha nubosidad.";
   }
 
+  // Alertas
+  const alertas = [];
+  if (parseFloat(promedioSemanal) > 28) {
+    alertas.push("🌡️ Alerta de calor: temperatura promedio elevada.");
+  }
+  const diasLluvia = (conteoClima["Lluvioso"] || 0) + (conteoClima["Lluvia intensa"] || 0) + (conteoClima["Llovizna"] || 0);
+  if (diasLluvia >= 3) {
+    alertas.push("🌧️ Semana lluviosa: se esperan varios días con precipitaciones.");
+  }
+  if (conteoClima["Nieve"]) {
+    alertas.push("❄️ Alerta de nieve: posibles nevadas durante la semana.");
+  }
+
   return {
     min: minSemanal,
     max: maxSemanal,
     promedio: promedioSemanal,
     conteo: conteoClima,
-    resumen: resumenTexto
+    resumen: resumenTexto,
+    alertas
   };
 };
 
-function renderHome() {
+
+// ── RENDER HOME ───────────────────────────────────────────────────
+function renderHome(ciudades) {
   const contenedor = document.getElementById("lista-ciudades");
   if (!contenedor) return;
-  
-  contenedor.textContent = '';
+  contenedor.textContent = "";
 
   ciudades.forEach((ciudad) => {
     const col = document.createElement("div");
     col.className = "col-12 col-md-6 col-lg-4 col-xl-3";
-    
+
     const card = document.createElement("div");
     card.className = "place-card";
     card.addEventListener("click", () => irADetalle(ciudad.id));
@@ -162,26 +182,25 @@ function renderHome() {
     infoDiv.appendChild(nameH3);
     infoDiv.appendChild(tempDiv);
     infoDiv.appendChild(statusSpan);
-    
     card.appendChild(iconSpan);
     card.appendChild(infoDiv);
-    
     col.appendChild(card);
-    
     contenedor.appendChild(col);
   });
 }
 
+
+// ── RENDER DETALLE ────────────────────────────────────────────────
 function irADetalle(id) {
-  const ciudad = buscarCiudadPorId(id);
+  const ciudad = app.buscarCiudadPorId(id);
   const estadisticas = calcularEstadisticas(ciudad.pronosticoSemanal);
   const contenedorDetalle = document.getElementById("detalle-contenido");
-  
-  contenedorDetalle.textContent = '';
+  contenedorDetalle.textContent = "";
 
   const detailWrapper = document.createElement("div");
   detailWrapper.className = "weather-detail";
 
+  // Header
   const headerDiv = document.createElement("div");
   headerDiv.className = "weather-detail__header mb-4 text-center";
 
@@ -197,20 +216,46 @@ function irADetalle(id) {
   statusP.className = "weather-detail__status text-muted";
   statusP.textContent = ciudad.estado;
 
+  const tempActual = document.createElement("p");
+  tempActual.className = "fs-2 fw-bold";
+  tempActual.textContent = ciudad.temperatura + "°C";
+
+  const extraInfo = document.createElement("p");
+  extraInfo.className = "text-muted small";
+  extraInfo.textContent = `💧 Humedad: ${ciudad.humedad}%  |  💨 Viento: ${ciudad.viento} km/h`;
+
   headerDiv.appendChild(mainIcon);
   headerDiv.appendChild(titleName);
   headerDiv.appendChild(statusP);
+  headerDiv.appendChild(tempActual);
+  headerDiv.appendChild(extraInfo);
   detailWrapper.appendChild(headerDiv);
 
+  // Alertas
+  if (estadisticas.alertas.length > 0) {
+    const alertasTitle = document.createElement("h5");
+    alertasTitle.className = "mb-2 border-bottom pb-2";
+    alertasTitle.textContent = "⚠️ Alertas de clima";
+    detailWrapper.appendChild(alertasTitle);
+
+    estadisticas.alertas.forEach((alerta) => {
+      const alertDiv = document.createElement("div");
+      alertDiv.className = "alert alert-warning py-2";
+      alertDiv.textContent = alerta;
+      detailWrapper.appendChild(alertDiv);
+    });
+  }
+
+  // Estadísticas
   const statsTitle = document.createElement("h5");
-  statsTitle.className = "mb-3 border-bottom pb-2";
+  statsTitle.className = "mb-3 border-bottom pb-2 mt-3";
   statsTitle.textContent = "Estadísticas de la semana";
   detailWrapper.appendChild(statsTitle);
 
   const statsBox = document.createElement("div");
   statsBox.className = "bg-light p-3 rounded mb-4";
 
-  const crearDatoEstadistico = (label, valor) => {
+  const crearDato = (label, valor) => {
     const p = document.createElement("p");
     p.className = "mb-1";
     const strong = document.createElement("strong");
@@ -220,10 +265,9 @@ function irADetalle(id) {
     return p;
   };
 
-  statsBox.appendChild(crearDatoEstadistico("Temperatura Mínima:", estadisticas.min + "°"));
-  statsBox.appendChild(crearDatoEstadistico("Temperatura Máxima:", estadisticas.max + "°"));
-  statsBox.appendChild(crearDatoEstadistico("Promedio Semanal:", estadisticas.promedio + "°"));
-  
+  statsBox.appendChild(crearDato("Temperatura Mínima:", estadisticas.min + "°C"));
+  statsBox.appendChild(crearDato("Temperatura Máxima:", estadisticas.max + "°C"));
+  statsBox.appendChild(crearDato("Promedio Semanal:",   estadisticas.promedio + "°C"));
   statsBox.appendChild(document.createElement("hr"));
 
   const diasClimaTitle = document.createElement("p");
@@ -237,19 +281,19 @@ function irADetalle(id) {
   ulConteo.className = "mb-2";
   for (const estado in estadisticas.conteo) {
     const li = document.createElement("li");
-    li.textContent = estado + ": " + estadisticas.conteo[estado] + " días";
+    li.textContent = `${estado}: ${estadisticas.conteo[estado]} días`;
     ulConteo.appendChild(li);
   }
   statsBox.appendChild(ulConteo);
 
   const resumenAlert = document.createElement("div");
   resumenAlert.className = "alert alert-info mt-3 mb-0";
-  resumenAlert.setAttribute("role", "alert");
   resumenAlert.textContent = estadisticas.resumen;
   statsBox.appendChild(resumenAlert);
 
   detailWrapper.appendChild(statsBox);
 
+  // Pronóstico
   const forecastTitle = document.createElement("h5");
   forecastTitle.className = "weather-detail__forecast-title border-bottom pb-2";
   forecastTitle.textContent = "Pronóstico Extendido";
@@ -282,7 +326,6 @@ function irADetalle(id) {
     dayCard.appendChild(divMin);
     dayCard.appendChild(divMax);
     dayCard.appendChild(divEstado);
-
     forecastContainer.appendChild(dayCard);
   });
 
@@ -293,18 +336,20 @@ function irADetalle(id) {
   offcanvas.show();
 }
 
+
+// ── ACERCA DE ─────────────────────────────────────────────────────
 function abrirAcercaDe() {
   const contenedorDetalle = document.getElementById("detalle-contenido");
-  contenedorDetalle.textContent = '';
-  
+  contenedorDetalle.textContent = "";
+
   const title = document.createElement("h2");
   title.textContent = "Acerca de";
-  
+
   const hr = document.createElement("hr");
-  
+
   const text = document.createElement("p");
-  text.textContent = "Este es un proyecto para el curso de Desarrollo Front End con el framework Bootstrap y JS Vanilla.";
-  
+  text.textContent = "WeatherApp consume datos reales desde Open-Meteo API. Proyecto desarrollado para el Módulo 5 del bootcamp de Desarrollo Frontend.";
+
   contenedorDetalle.appendChild(title);
   contenedorDetalle.appendChild(hr);
   contenedorDetalle.appendChild(text);
@@ -313,6 +358,20 @@ function abrirAcercaDe() {
   offcanvas.show();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  renderHome();
+
+// ── INIT ──────────────────────────────────────────────────────────
+const app = new WeatherApp(new ApiClient());
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const mensaje = document.getElementById("mensaje-estado");
+  mensaje.textContent = "Cargando datos del clima...";
+
+  try {
+    await app.cargarCiudades();
+    mensaje.textContent = "";
+    renderHome(app.ciudades);
+  } catch (error) {
+    mensaje.textContent = "Error al cargar los datos. Intenta recargar la página.";
+    console.error(error);
+  }
 });

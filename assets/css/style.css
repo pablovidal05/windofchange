@@ -168,4 +168,16 @@ main {
   font-size: 0.9rem;
 }
 
+
+#mensaje-estado {
+  font-size: 1rem;
+  min-height: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.alert-warning {
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
 /*# sourceMappingURL=style.css.map */
