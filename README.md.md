@@ -22,3 +22,6 @@ A partir del pronóstico de 7 días obtenido de la API se calcula:
 - Conteo de días por tipo de clima
 - Alertas automáticas: calor si promedio > 28°C, lluvia si hay 3+ días lluviosos
 
+## Cómo ejecutar
+
+Abrir index.html en el navegador. Requiere conexión a internet para consumir la API.
