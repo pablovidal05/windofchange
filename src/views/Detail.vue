@@ -16,6 +16,16 @@
             <p class="weather-detail__status text-muted">{{ ciudad.estado }}</p>
             <p class="fs-2 fw-bold">{{ ciudad.temperatura }}°C</p>
             <p class="text-muted small">💧 Humedad: {{ ciudad.humedad }}%  |  💨 Viento: {{ ciudad.viento }} km/h</p>
+
+            <div v-if="authStore.isAuthenticated" class="mt-3">
+              <button
+                @click="toggleFavorito"
+                class="btn btn-sm"
+                :class="esFavorito ? 'btn-warning' : 'btn-outline-warning'"
+              >
+                {{ esFavorito ? '★ Quitar de favoritos' : '☆ Agregar a favoritos' }}
+              </button>
+            </div>
           </div>
 
           <!-- Alertas -->
@@ -68,18 +78,33 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
-import { weatherApp } from '../services/weatherService'
-import { calcularEstadisticas } from '../services/weatherService'
+import { weatherApp, calcularEstadisticas } from '../services/weatherService'
+import { useAuthStore } from '../stores/auth'
+import { useFavoritosStore } from '../stores/favoritos'
 
 const props = defineProps({
   id: String
 })
 
+const authStore = useAuthStore()
+const favoritosStore = useFavoritosStore()
 const ciudad = ref(null)
 
 const estadisticas = computed(() => {
   return ciudad.value ? calcularEstadisticas(ciudad.value.pronosticoSemanal) : {}
 })
+
+const esFavorito = computed(() => {
+  return ciudad.value ? favoritosStore.esFavorito(ciudad.value.id) : false
+})
+
+const toggleFavorito = () => {
+  if (esFavorito.value) {
+    favoritosStore.quitar(ciudad.value.id)
+  } else {
+    favoritosStore.agregar(ciudad.value.id)
+  }
+}
 
 onMounted(async () => {
   await weatherApp.cargarCiudades()
