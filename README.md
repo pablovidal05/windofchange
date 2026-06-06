@@ -1,27 +1,34 @@
-## Cómo ejecutar
+# WeatherApp – Módulo 7
 
-### Instalación
-```bash
-npm install
-```
+App de clima con sistema de autenticación de usuarios, estado global con Pinia y rutas protegidas. Construida con Vue 3, Vue Router y Firebase Auth.
 
-### Desarrollo
-```bash
-npm run dev
-```
+## Sistema de usuarios
 
-Abre [http://localhost:5173](http://localhost:5173) en tu navegador.
+Cada usuario autenticado tiene acceso a:
+- **Lista de ciudades favoritas** — se guarda en el store de Pinia durante la sesión
+- **Navbar personalizado** — muestra el email del usuario y botón de cerrar sesión
 
-### Build para producción
-```bash
-npm build
-```
+Los datos de sesión que se guardan en el store:
+- `email` del usuario autenticado
+- `uid` de Firebase
+- `isAuthenticated` — flag que controla el acceso a rutas protegidas
 
-## Interactividad
+## Rutas
 
-- **Búsqueda de ciudades**: Input en Home que filtra en tiempo real.
-- **Navegación sin recarga**: Vue Router maneja las transiciones entre Home y Detalle.
-- **Datos reactivos**: Vue `ref()` y `computed()` manejan el estado.
+| Ruta | Acceso | Descripción |
+|------|--------|-------------|
+| `/` | Público | Home con listado de ciudades |
+| `/location/:id` | Público | Detalle del clima de una ciudad |
+| `/login` | Público | Formulario de inicio de sesión |
+| `/registro` | Público | Formulario de creación de cuenta |
+| `/favoritos` | Privado | Ciudades favoritas del usuario autenticado |
+
+## Autenticación
+
+- Implementada con **Firebase Authentication** (correo + contraseña)
+- El estado de sesión se maneja con **Pinia**
+- Las rutas privadas se protegen con `router.beforeEach`
+- Si el usuario no está autenticado e intenta acceder a `/favoritos`, es redirigido a `/login`
 
 ## API utilizada
 
@@ -30,18 +37,25 @@ npm build
 - **Documentación**: https://open-meteo.com/en/docs
 - Sin API key requerida. Gratuita y de código abierto.
 
-## Estadísticas calculadas
-
-A partir del pronóstico de 7 días:
-- Temperatura mínima y máxima de la semana
-- Temperatura promedio
-- Conteo de días por tipo de clima
-- Alertas automáticas: calor (promedio > 28°C), lluvia (≥3 días lluviosos), nieve
-
 ## Repositorio
 
 https://github.com/pablovidal05/windofchange
 
----
+## Cómo ejecutar
 
-**Proyecto desarrollado para el Módulo 6 del bootcamp de Desarrollo Frontend.**
+### Instalación
+```bash
+pnpm install
+```
+
+### Desarrollo
+```bash
+pnpm run dev
+```
+
+Abre [http://localhost:5173](http://localhost:5173) en tu navegador.
+
+### Build para producción
+```bash
+pnpm run build
+`` 
