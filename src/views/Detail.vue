@@ -70,7 +70,14 @@
           </div>
         </div>
 
-        <p v-else class="text-center text-muted">Cargando detalle...</p>
+        <p v-else-if="cargando" class="text-center text-muted">Cargando detalle...</p>
+
+        <p v-else-if="error" class="text-center text-danger">{{ error }}</p>
+
+        <div v-else class="text-center text-muted">
+          <p>No se encontró la ciudad solicitada.</p>
+          <router-link to="/" class="btn btn-dark mt-2">Volver al Home</router-link>
+        </div>
       </div>
     </main>
   </div>
@@ -89,6 +96,8 @@ const props = defineProps({
 const authStore = useAuthStore()
 const favoritosStore = useFavoritosStore()
 const ciudad = ref(null)
+const cargando = ref(true)
+const error = ref('')
 
 const estadisticas = computed(() => {
   return ciudad.value ? calcularEstadisticas(ciudad.value.pronosticoSemanal) : {}
@@ -107,8 +116,15 @@ const toggleFavorito = () => {
 }
 
 onMounted(async () => {
-  await weatherApp.cargarCiudades()
-  const id = parseInt(props.id)
-  ciudad.value = weatherApp.buscarCiudadPorId(id)
+  try {
+    await weatherApp.cargarCiudades()
+    const id = parseInt(props.id)
+    ciudad.value = weatherApp.buscarCiudadPorId(id)
+  } catch (err) {
+    error.value = 'Error al cargar el detalle del clima. Intenta recargar la página.'
+    console.error(err)
+  } finally {
+    cargando.value = false
+  }
 })
 </script>

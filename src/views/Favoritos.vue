@@ -7,7 +7,10 @@
 
     <main>
       <div class="container py-5">
-        <div v-if="favoritos.length === 0" class="text-center text-muted">
+        <p v-if="cargando" class="text-center text-muted">Cargando tus favoritos...</p>
+        <p v-else-if="error" class="text-center text-danger">{{ error }}</p>
+
+        <div v-else-if="favoritos.length === 0" class="text-center text-muted">
           <p>No tienes ciudades favoritas aún.</p>
           <router-link to="/" class="btn btn-dark mt-2">Explorar ciudades</router-link>
         </div>
@@ -33,18 +36,32 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useAuthStore } from '../stores/auth'
 import { useFavoritosStore } from '../stores/favoritos'
 import { weatherApp } from '../services/weatherService'
 
 const authStore = useAuthStore()
 const favoritosStore = useFavoritosStore()
+const cargando = ref(true)
+const error = ref('')
 
 const favoritos = computed(() => {
   return favoritosStore.ids
     .map(id => weatherApp.buscarCiudadPorId(id))
     .filter(Boolean)
+})
+
+// Asegura que las ciudades estén cargadas aunque se entre directo a /favoritos.
+onMounted(async () => {
+  try {
+    await weatherApp.cargarCiudades()
+  } catch (err) {
+    error.value = 'No se pudieron cargar tus favoritos. Intenta recargar la página.'
+    console.error(err)
+  } finally {
+    cargando.value = false
+  }
 })
 
 const quitar = (id) => {

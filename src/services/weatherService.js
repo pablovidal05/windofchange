@@ -64,6 +64,8 @@ class WeatherApp {
   }
 
   async cargarCiudades() {
+    // Evita volver a llamar a la API si las ciudades ya están cargadas.
+    if (this.ciudades.length > 0) return;
     const promesas = CIUDADES_BASE.map(async (ciudadBase) => {
       const datos = await this.apiClient.obtenerClima(ciudadBase.lat, ciudadBase.lon);
       return this.procesarRespuesta(ciudadBase, datos);

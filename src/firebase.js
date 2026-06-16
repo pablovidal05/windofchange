@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: "AIzaSyC9ihDOZqrFCR73KTNHi_J3nkZZa8Nu2pQ",
@@ -12,3 +12,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig)
 export const auth = getAuth(app)
+
+// Mantiene la sesión entre recargas usando el almacenamiento local del navegador.
+setPersistence(auth, browserLocalPersistence)
